@@ -1,0 +1,28 @@
+<div class="container p-3 bg-light">
+  <%= link_to '🏠', root_path, class: 'btn' %>
+
+
+  <h2><%= @restaurant.name %></h2>
+  <p> Address: <%= @restaurant.address %></p>
+  <p> Phone Number: <%= @restaurant.phone_number %></p>
+  <p> Category: <%= @restaurant.category %></p>
+  <p> Reviews: <%= link_to "Add a review", new_restaurant_review_path(@restaurant.id), class: "btn btn-outline-secondary" %></p>
+  <%# <p> Reviews: <%= @restaurant.reviews %>
+  <div>
+    <% @restaurant.reviews.each do |review| %>
+      <div class="card m-4 p-3">
+        <p><%= review.content %></p>
+        <p>- <%= review.rating %></p>
+        <%= link_to '🗑️', restaurant_review_path(review.id), data: { turbo_method: :delete, turbo_confirm: "Are you sure???" }, class: "btn" %>
+      </div>
+    <% end %>
+  </div>
+
+  <div >
+    <%= link_to "✏️ Edit", edit_restaurant_path(@restaurant), class: "btn ps-0" %>
+    <%= link_to "Delete", root_path(@restaurant), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn ps-0" %>
+  </div>
+
+<div class="btn btn-outline-secondary p-3 m-3">
+  <%= link_to "Back to list", restaurants_path %>
+</div>
